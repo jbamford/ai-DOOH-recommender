@@ -1,14 +1,18 @@
 import streamlit as st
 import strategy_openAI as strategy_openAI
 import pandas as pd
+import random
 
 stateless_table = strategy_openAI.OPEN_AI_STATELESS()
 
 st.title("AI DOOH Media Planner")
-st.header("Experimental DOOH media planner that uses AI to build your media plan from text prompts and audience descriptions")
+st.header("Experimental DOOH media planner that uses AI to help build your media plan from text prompts and audience descriptions")
 
-industry_vertical = st.text_input("Industry Vertical")
-media_goals = st.text_area("Campaign Goals")
+example_verticle = ["Retail",'CPG','QSR','Automotive','Travel','Entertainment','Healthcare','Education','Finance','Technology','Real Estate','Government','Non-Profit']
+example_goals = ["Drive to store", "Increase Awareness of a new product", "Drive Brand Consideration", "Drive Online Sales", "Drive Offline Sales", "Drive App Downloads", "Support an event activation"]
+
+industry_vertical = st.text_input("Industry Vertical - For example: {}".format(random.choice(example_verticle)))
+media_goals = st.text_area("Campaign Goals - For example: {}".format(random.choice(example_goals)))
 generate_media_plan = st.button("Generate a brand new DOOH strategy")
 # st.text("Good edit keywords include: 'add', 'update', 'combine', 'delete'")
 # edit_media_plan_button = st.button("Edit Media Plan")    
