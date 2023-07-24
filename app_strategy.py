@@ -21,5 +21,6 @@ if generate_media_plan:
 #     # st.dataframe(media_plan_edit)
 try:
     st.write(media_plan)   
+    st.markdown("Want an official media plan? Drop us a [note](https://www.goldfishads.com/contact-us) and our planning team will convert this strategy into a media plan for you. \n At a minium we're sure you will love the maps and mockups.")
 except:
     pass 
