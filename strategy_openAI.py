@@ -298,29 +298,35 @@ class OPEN_AI_STATELESS():
         response_geo_list = openai.ChatCompletion.create(model="gpt-4", messages=[
             {"role": "system", "content": "You are a helpful digital out of home media planner"},
 
-            {"role": "user", "content": """Below are the possible digital out of home targeting tactics. Based on the below tactics recommend a list of relevant strategies for a given advertiser and goal that can use these tactics.  You do not need to use all of these tactics. Please only include the ones you think will be the most valuable for the brand.
-                DOOH Targeting tactics: 
-                - Audience Targeting
-                    - 1st Party Data
-                    - 3rd Party Data
-                        - Demographics
-                        - Household 
-                        - Behaviors
-                        - Interests
-                        - Life Events
-                        - etc   
-                - Geo Targeting
-                    - Administrative boundaries - DMA, City, Zip, Address,
-                    - Radius around a point Radius, Lat/Long
-                    - Custom Geofences - Along highways, neighborhoods, etc
-                    - Spacial indexing - Find screens in-between two points with a certain overlaps
-                - Venue Type Targeting
-                    - Day/Week Parting to reach certain audiences on the venue types       
-                - Event Targeting
-                - Picking specific locations in retail
-             
-             Note: when recommending venue type targeting you can only use the following valid venue types:{}
-             """.format(self.valid_venue_types)},
+            {"role": "user", "content": """Below are the possible digital out of home targeting tactics. Based on the below tactics recommend a list of relevant strategies for a given advertiser and goal that uses these tactics. You do not need to use all of these tactics. Please only include the ones you think will be the most valuable for the brand.
+DOOH Targeting tactics: 
+- Audience Targeting
+    - 1st Party Data
+    - 3rd Party Data
+        - Demographics
+        - Household 
+        - Behaviors
+        - Interests
+        - Life Events
+        - etc   
+- Geo Targeting
+    - Administrative boundaries - DMA, City, Zip, Address,
+    - Point Radius Geofencing
+    - Custom Geofences - Along highways, neighborhoods, etc
+    - Spacial indexing - Find screens in-between two points with a certain overlaps
+    - Event Targeting - Target screens around specific events
+- Venue Type Targeting
+    - Day/Week Parting to reach certain audiences on the venue types       
+- Identity DOOH Screens in target retail locations
+
+Note: when recommending Venue Type Targeting you can only use the following valid venue types:{}
+
+Additional Considerations for Some of the Tactics:
+1st Party Data - This is most useful when the client has data on their customers and wants to reach them in DOOH. In order to use this tactic, the client will need to provide the data that includes a location component(address, zipcode, latitude, longitude, etc). Example first party data sets include: CRM data, website traffic data, account based addresses(b2b), etc. As long as there is a location we can match it to dooh.
+3rd Party Data - This works for most strategies as there is a ton of data available. The key, is combining 3rd party data sets together until you have a profile of the ideal target customer.
+Radius around a point Radius, Lat/Long - This is useful when the advertiser has a physical store. Also, it works well when the advertiser wants to conquest competitor locations. Finally, it can be a good way to reach people that go to a certain location. For example, if you want to reach people that go to the gym, you can target a radius around the gym.
+Venue Type Targeting - DOOH venue types have certain audiences that go into them. You can use this information to pick what ones may make the most sense. In order to effectly reach the most people you can day part certain times of the day when the venue types are most busy, or target days of the week when they are busy. As an example, if you wanted to reach business people, the venue type Bars may not be the best choise unless you day parted it to only run during happy hour(3-7pm) Thursday and Friday.
+Identity DOOH Screens in target retail locations - This tactic only works if the advertiser sells a product in a store with a dooh screen..""".format(self.valid_venue_types)},
             {"role": "assistant", "content": "Ok, I will use those tactics and recommend relevant DOOH strategies"},
             # {"role": "assistant", "content": "Ok, I will respond with a CSV as requested with the headers:\nGeo / Targeting,DOOH Venue Types, Flights"},
 
