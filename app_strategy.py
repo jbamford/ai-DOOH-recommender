@@ -18,7 +18,7 @@ generate_media_plan = st.button("Generate DOOH strategy")
 # edit_media_plan_button = st.button("Edit Media Plan")    
 
 if generate_media_plan:
-    with st.spinner("loading..."):
+    with st.spinner("Using the power of AI to generate a strategy..."):
     # response = call_steamship(prompt, context)
         media_plan = stateless_table.get_media_strategy(media_goals,industry_vertical)
     # st.dataframe(media_plan)
