@@ -18,7 +18,9 @@ generate_media_plan = st.button("Generate DOOH strategy")
 # edit_media_plan_button = st.button("Edit Media Plan")    
 
 if generate_media_plan:
-    media_plan = stateless_table.get_media_strategy(media_goals,industry_vertical)
+    with st.spinner("loading..."):
+    # response = call_steamship(prompt, context)
+        media_plan = stateless_table.get_media_strategy(media_goals,industry_vertical)
     # st.dataframe(media_plan)
 # if edit_media_plan_button:
 #     media_plan = stateless_table.edit_table(media_plan_description)
