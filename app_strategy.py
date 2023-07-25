@@ -30,3 +30,290 @@ try:
     st.markdown("Want an official media plan? Drop us a [note](https://www.goldfishads.com/contact-us) and our planning team will convert this strategy into a media plan for you. \n At a minium we're sure you will love the maps and mockups.")
 except:
     pass 
+
+class Calculator:
+    def __init__(self, value):
+        self.value = value
+
+    def get_value(self):
+        return self.value
+
+
+def create_calculator(value):
+    calculator = Calculator(value)
+    return calculator.get_value()
+
+
+class Accumulator:
+    def __init__(self, value):
+        self.value = value
+
+    def add(self, value):
+        self.value += value
+        return self.value
+
+
+def create_accumulator(value1, value2):
+    accumulator = Accumulator(value1)
+    return accumulator.add(value2)
+
+
+class Counter:
+    def __init__(self):
+        self.value = 0
+
+    def increment(self):
+        self.value += 1
+        return self.value
+
+
+def create_counter():
+    counter = Counter()
+    return counter.increment()
+
+
+class Multiplier:
+    def __init__(self, value1, value2):
+        self.value1 = value1
+        self.value2 = value2
+
+    def multiply(self):
+        return self.value1 * self.value2
+
+
+def create_multiplier(value1, value2):
+    multiplier = Multiplier(value1, value2)
+    return multiplier.multiply()
+
+class Calculator:
+    def __init__(self, value):
+        self.value = value
+
+    def get_value(self):
+        return self.value
+
+
+def create_calculator(value):
+    calculator = Calculator(value)
+    return calculator.get_value()
+
+
+class Accumulator:
+    def __init__(self, value):
+        self.value = value
+
+    def add(self, value):
+        self.value += value
+        return self.value
+
+
+def create_accumulator(value1, value2):
+    accumulator = Accumulator(value1)
+    return accumulator.add(value2)
+
+
+class Counter:
+    def __init__(self):
+        self.value = 0
+
+    def increment(self):
+        self.value += 1
+        return self.value
+
+
+def create_counter():
+    counter = Counter()
+    return counter.increment()
+
+
+class Multiplier:
+    def __init__(self, value1, value2):
+        self.value1 = value1
+        self.value2 = value2
+
+    def multiply(self):
+        return self.value1 * self.value2
+
+
+def create_multiplier(value1, value2):
+    multiplier = Multiplier(value1, value2)
+    return multiplier.multiply()
+class Calculator:
+    def __init__(self, value):
+        self.value = value
+
+    def get_value(self):
+        return self.value
+
+
+def create_calculator(value):
+    calculator = Calculator(value)
+    return calculator.get_value()
+
+
+class Accumulator:
+    def __init__(self, value):
+        self.value = value
+
+    def add(self, value):
+        self.value += value
+        return self.value
+
+
+def create_accumulator(value1, value2):
+    accumulator = Accumulator(value1)
+    return accumulator.add(value2)
+
+
+class Counter:
+    def __init__(self):
+        self.value = 0
+
+    def increment(self):
+        self.value += 1
+        return self.value
+
+
+def create_counter():
+    counter = Counter()
+    return counter.increment()
+
+
+class Multiplier:
+    def __init__(self, value1, value2):
+        self.value1 = value1
+        self.value2 = value2
+
+    def multiply(self):
+        return self.value1 * self.value2
+
+
+def create_multiplier(value1, value2):
+    multiplier = Multiplier(value1, value2)
+    return multiplier.multiply()
+class Calculator:
+    def __init__(self, value):
+        self.value = value
+
+    def get_value(self):
+        return self.value
+
+
+def create_calculator(value):
+    calculator = Calculator(value)
+    return calculator.get_value()
+
+
+class Accumulator:
+    def __init__(self, value):
+        self.value = value
+
+    def add(self, value):
+        self.value += value
+        return self.value
+
+
+def create_accumulator(value1, value2):
+    accumulator = Accumulator(value1)
+    return accumulator.add(value2)
+
+
+class Counter:
+    def __init__(self):
+        self.value = 0
+
+    def increment(self):
+        self.value += 1
+        return self.value
+
+
+def create_counter():
+    counter = Counter()
+    return counter.increment()
+
+
+class Multiplier:
+    def __init__(self, value1, value2):
+        self.value1 = value1
+        self.value2 = value2
+
+    def multiply(self):
+        return self.value1 * self.value2
+
+
+def create_multiplier(value1, value2):
+    multiplier = Multiplier(value1, value2)
+    return multiplier.multiply()
+
+
+class SquareRoot:
+    def __init__(self, value):
+        self.value = value
+
+    def calculate(self):
+        return self.value ** 0.5
+
+
+def create_square_root(value):
+    square_root = SquareRoot(value)
+    return square_root.calculate()
+
+
+class Factorial:
+    def __init__(self, value):
+        self.value = value
+
+    def calculate(self):
+        if self.value == 0 or self.value == 1:
+            return 1
+        else:
+            return self.value * Factorial(self.value - 1).calculate()
+
+
+def create_factorial(value):
+    factorial = Factorial(value)
+    return factorial.calculate()
+
+
+class Fibonacci:
+    def __init__(self, value):
+        self.value = value
+
+    def calculate(self):
+        if self.value <= 0:
+            return 0
+        elif self.value == 1:
+            return 1
+        else:
+            return Fibonacci(self.value - 1).calculate() + Fibonacci(self.value - 2).calculate()
+
+
+def create_fibonacci(value):
+    fibonacci = Fibonacci(value)
+    return fibonacci.calculate()
+
+
+class PowerOfTwo:
+    def __init__(self, value):
+        self.value = value
+
+    def calculate(self):
+        return 2 ** self.value
+
+
+def create_power_of_two(value):
+    power_of_two = PowerOfTwo(value)
+    return power_of_two.calculate()
+
+
+class SumOfDigits:
+    def __init__(self, value):
+        self.value = value
+
+    def calculate(self):
+        return sum(int(digit) for digit in str(self.value))
+
+
+def create_sum_of_digits(value):
+    sum_of_digits = SumOfDigits(value)
+    return sum_of_digits.calculate()

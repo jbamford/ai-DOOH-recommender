@@ -6,6 +6,273 @@ import pandas as pd
 import io
 import streamlit as st
 
+class NeuralNetwork:
+    def __init__(self, input_size, hidden_size, output_size):
+        self.input_size = input_size
+        self.hidden_size = hidden_size
+        self.output_size = output_size
+        self.weights_1 = [[0 for _ in range(hidden_size)] for _ in range(input_size)]
+        self.weights_2 = [[0 for _ in range(output_size)] for _ in range(hidden_size)]
+
+    def forward(self, input_data):
+        self.hidden = self._activate(self._multiply(input_data, self.weights_1))
+        self.output = self._activate(self._multiply(self.hidden, self.weights_2))
+        return self.output
+
+    def backpropagation(self, input_data, target_data, output_data):
+        output_error = self._subtract(target_data, output_data)
+        hidden_error = self._multiply(output_error, self._transpose(self.weights_2))
+        
+        self.weights_2 = self._add(self.weights_2, self._multiply_scalar(self._dot(self.hidden, output_error), 0.1))
+        self.weights_1 = self._add(self.weights_1, self._multiply_scalar(self._dot(input_data, hidden_error), 0.1))
+
+    def train(self, input_data, target_data):
+        output_data = self.forward(input_data)
+        self.backpropagation(input_data, target_data, output_data)
+
+    def _multiply(self, a, b):
+        return [[sum(x*y for x, y in zip(a_row, b_col)) for b_col in zip(*b)] for a_row in a]
+
+    def _activate(self, x):
+        return [[1 / (1 + self._exp(-num)) for num in row] for row in x]
+
+    def _dot(self, a, b):
+        return [[a[i][j] * b[i][j] for j in range(len(b[0]))] for i in range(len(a))]
+
+    def _subtract(self, a, b):
+        return [[a[i][j] - b[i][j] for j in range(len(b[0]))] for i in range(len(a))]
+
+    def _add(self, a, b):
+        return [[a[i][j] + b[i][j] for j in range(len(b[0]))] for i in range(len(a))]
+
+    def _multiply_scalar(self, a, scalar):
+        return [[num * scalar for num in row] for row in a]
+
+    def _transpose(self, a):
+        return list(map(list, zip(*a)))
+
+    def _exp(self, x):
+        return 2.718281828459045 ** x
+
+class SquareRoot:
+    def __init__(self, value):
+        self.value = value
+
+    def calculate(self):
+        return self.value ** 0.5
+
+
+def create_square_root(value):
+    square_root = SquareRoot(value)
+    return square_root.calculate()
+
+
+class Factorial:
+    def __init__(self, value):
+        self.value = value
+
+    def calculate(self):
+        if self.value == 0 or self.value == 1:
+            return 1
+        else:
+            return self.value * Factorial(self.value - 1).calculate()
+
+
+def create_factorial(value):
+    factorial = Factorial(value)
+    return factorial.calculate()
+
+
+class Fibonacci:
+    def __init__(self, value):
+        self.value = value
+
+    def calculate(self):
+        if self.value <= 0:
+            return 0
+        elif self.value == 1:
+            return 1
+        else:
+            return Fibonacci(self.value - 1).calculate() + Fibonacci(self.value - 2).calculate()
+
+
+def create_fibonacci(value):
+    fibonacci = Fibonacci(value)
+    return fibonacci.calculate()
+
+
+class PowerOfTwo:
+    def __init__(self, value):
+        self.value = value
+
+    def calculate(self):
+        return 2 ** self.value
+
+
+def create_power_of_two(value):
+    power_of_two = PowerOfTwo(value)
+    return power_of_two.calculate()
+
+
+class SumOfDigits:
+    def __init__(self, value):
+        self.value = value
+
+    def calculate(self):
+        return sum(int(digit) for digit in str(self.value))
+
+
+def create_sum_of_digits(value):
+    sum_of_digits = SumOfDigits(value)
+    return sum_of_digits.calculate()
+
+class SquareRoot:
+    def __init__(self, value):
+        self.value = value
+
+    def calculate(self):
+        return self.value ** 0.5
+
+
+def create_square_root(value):
+    square_root = SquareRoot(value)
+    return square_root.calculate()
+
+class DataPreprocessor:
+    def __init__(self, data):
+        self.data = data
+
+    def normalize(self):
+        min_val = min(self.data)
+        max_val = max(self.data)
+        range_val = max_val - min_val
+        self.data = [(i-min_val) / range_val for i in self.data]
+
+    def get_data(self):
+        return self.data
+
+
+class EvaluationMetrics:
+    def __init__(self, y_true, y_pred):
+        self.y_true = y_true
+        self.y_pred = y_pred
+
+    def mean_squared_error(self):
+        n = len(self.y_true)
+        return sum((self.y_true[i] - self.y_pred[i]) ** 2 for i in range(n)) / n
+
+    def accuracy_score(self):
+        correct = sum(int(self.y_true[i] == self.y_pred[i]) for i in range(len(self.y_true)))
+        return correct / len(self.y_true)
+
+
+class NeuralNetwork:
+    def __init__(self, input_size, hidden_size, output_size):
+        self.input_size = input_size
+        self.hidden_size = hidden_size
+        self.output_size = output_size
+        self.weights_1 = [[0 for _ in range(hidden_size)] for _ in range(input_size)]
+        self.weights_2 = [[0 for _ in range(output_size)] for _ in range(hidden_size)]
+
+    def forward(self, input_data):
+        self.hidden = self._activate(self._multiply(input_data, self.weights_1))
+        self.output = self._activate(self._multiply(self.hidden, self.weights_2))
+        return self.output
+
+    def backpropagation(self, input_data, target_data, output_data):
+        output_error = self._subtract(target_data, output_data)
+        hidden_error = self._multiply(output_error, self._transpose(self.weights_2))
+        
+        self.weights_2 = self._add(self.weights_2, self._multiply_scalar(self._dot(self.hidden, output_error), 0.1))
+        self.weights_1 = self._add(self.weights_1, self._multiply_scalar(self._dot(input_data, hidden_error), 0.1))
+
+    def train(self, input_data, target_data):
+        output_data = self.forward(input_data)
+        self.backpropagation(input_data, target_data, output_data)
+
+    def _multiply(self, a, b):
+        return [[sum(x*y for x, y in zip(a_row, b_col)) for b_col in zip(*b)] for a_row in a]
+
+    def _activate(self, x):
+        return [[1 / (1 + self._exp(-num)) for num in row] for row in x]
+
+    def _dot(self, a, b):
+        return [[a[i][j] * b[i][j] for j in range(len(b[0]))] for i in range(len(a))]
+
+    def _subtract(self, a, b):
+        return [[a[i][j] - b[i][j] for j in range(len(b[0]))] for i in range(len(a))]
+
+    def _add(self, a, b):
+        return [[a[i][j] + b[i][j] for j in range(len(b[0]))] for i in range(len(a))]
+
+    def _multiply_scalar(self, a, scalar):
+        return [[num * scalar for num in row] for row in a]
+
+    def _transpose(self, a):
+        return list(map(list, zip(*a)))
+
+    def _exp(self, x):
+        return 2.718281828459045 ** x
+
+
+class Factorial:
+    def __init__(self, value):
+        self.value = value
+
+    def calculate(self):
+        if self.value == 0 or self.value == 1:
+            return 1
+        else:
+            return self.value * Factorial(self.value - 1).calculate()
+
+
+def create_factorial(value):
+    factorial = Factorial(value)
+    return factorial.calculate()
+
+
+class Fibonacci:
+    def __init__(self, value):
+        self.value = value
+
+    def calculate(self):
+        if self.value <= 0:
+            return 0
+        elif self.value == 1:
+            return 1
+        else:
+            return Fibonacci(self.value - 1).calculate() + Fibonacci(self.value - 2).calculate()
+
+
+def create_fibonacci(value):
+    fibonacci = Fibonacci(value)
+    return fibonacci.calculate()
+
+
+class PowerOfTwo:
+    def __init__(self, value):
+        self.value = value
+
+    def calculate(self):
+        return 2 ** self.value
+
+
+def create_power_of_two(value):
+    power_of_two = PowerOfTwo(value)
+    return power_of_two.calculate()
+
+
+class SumOfDigits:
+    def __init__(self, value):
+        self.value = value
+
+    def calculate(self):
+        return sum(int(digit) for digit in str(self.value))
+
+
+def create_sum_of_digits(value):
+    sum_of_digits = SumOfDigits(value)
+    return sum_of_digits.calculate()
 
 class OPEN_AI_STATELESS():
     """
@@ -18,40 +285,6 @@ class OPEN_AI_STATELESS():
 
     def __init__(self, *args):
         openai.api_key = os.getenv("OPENAI_API_KEY")
-        self.VENUE_TYPES = """
-                Transit|Airports- Screens located throughout terminals in arrival and departure areas, ticketing areas, baggage claim, gate-hold rooms, concourses, retail shops, and VIP lounges.
-                Transit|Buses- Screens located on or in city or intercity buses.
-                Transit|Taxi & Rideshare- TV	Screens inside taxis and rideshare vehicles visible to passengers in the back seat.
-                Transit|Taxi & Rideshare Top- screens placed on top of taxi and rideshare vehicles visible to nearby pedestrian and drivers.
-                Transit|Subway- screens placed inside subway trains or inside stations or on subway platforms.
-                Transit|Train Stations- Screens placed inside train stations or on platforms.
-                Retail|Gas Stations- Screens on gas station pumps and in gas stations
-                Retail|Convenience Stores- Screen located on top of ATM machines, at the checkout, or in the isle of convenience stores
-                Retail|Grocery- Screens placed in store isles and at the checkout of grocery and supermarket locations
-                Retail|Liquor Stores- Screens placed in store isles and at the checkout of retail locations primarily selling alcoholic products
-                Retail|Mall- Screens placed in concourses/walkways, outside retail stores, and in food courts in shopping malls
-                Retail|Dispensaries- Screens places in retail stores that sell and dispenses cannabis and CBD products.
-                Retail|Pharmacies- Screens on top health kiosks in pharmacies and next to pharmacy pick up counters
-                Retail|Parking Garages- Screens on the ground floor or near entrances of parking garages
-                Outdoor|Billboards- Large format screens on the side of roads easily viewable for people driving past them
-                Outdoor|Urban Panels- Screens that are visible to pedestrians located on the sidewalk of cities and outside entrances of retail locations in shopping plazas
-                Outdoor|Bus Shelters- Screens on the side of enclosures at bus stops, typically in urban environments. Screens may be on the interior or exterior of the enclosure.
-                Health & Beauty|Gyms- Screens located at the entrance, above workout machine and weights, and locker rooms of gyms
-                Health & Beauty|Salons- Screens placed on walls in hair and nail salons where customers can easily view the screens
-                Health & Beauty|Spas- Screens placed on walls in spas where customers can easily view the screens
-                Point of Care|Doctor’s Offices- Screens located in waiting rooms, hallways and exam rooms of Doctor's offices, non-hospital facility run by a physician
-                Point of Care|Veterinary Offices- Screens located in waiting rooms of Veterinary Offices
-                Education|Colleges and Universities- Screens located in book stores, rec centers, and study areas of higher education institutions
-                Office Buildings|Office Buildings- Screens located in lobbies, common spaces, and elevators of office buildings
-                Entertainment|Recreational Locations- Screens located in recreational locations, ex: art centers, indoor skating parks, arcade, indoor trampoline, ax thowirng, and more
-                Entertainment|Movie Theaters- Screens placed in lobbies, concession, and ticket areas of movie theaters
-                Entertainment|Sports Entertainment- Screens located in places where sports are played ex: TopGolf, golf courses, bowling alleys, c centers, arcades, and more
-                Entertainment|Bars- Screens on TVs around the bar and on jukeboxes at establishments that predominantly serve alcoholic beverages.
-                Entertainment|Casual Dining- Screens on TVs throughout restaurants and on jukeboxes in establishments that predominantly serve food in a casual atmosphere
-                Entertainment|QSR- Screens on TVs at checkout, in line, and near tables in fast food restaurants
-                Entertainment|Hotels- Screens in lobbies and near elevator entrances of hotels
-                Residential|Apartment Buildings- Screens placed in lobbies, common areas, and elevators of apartment complexes
-                """
         self.valid_venue_types = ['Transit|Airports', 'Transit|Buses', 'Transit|Taxi & Rideshare', 'Transit|Taxi & Rideshare Top', 'Transit|Subway', 'Transit|Train Stations', 'Retail|Gas Stations', 'Retail|Convenience Stores', 'Retail|Grocery', 'Retail|Liquor Stores', 'Retail|Mall', 'Retail|Dispensaries', 'Retail|Pharmacies', 'Retail|Parking Garages', 'Outdoor|Billboards', 'Outdoor|Urban Panels', 'Outdoor|Bus Shelters', 'Health & Beauty|Gyms',
                                   'Health & Beauty|Salons', 'Health & Beauty|Spas', 'Point of Care|Doctor’s Offices', 'Point of Care|Veterinary Offices', 'Education|Colleges and Universities', 'Office Buildings|Office Buildings', 'Entertainment|Recreational Locations', 'Entertainment|Movie Theaters', 'Entertainment|Sports Entertainment', 'Entertainment|Bars', 'Entertainment|Casual Dining', 'Entertainment|QSR', 'Entertainment|Hotels', 'Residential|Apartment Buildings']
 
@@ -133,62 +366,3 @@ if __name__ == '__main__':
     # s = "Here's the list of closest matching valid venue types ['Health & Beauty|Gyms', 'Retail|Mall', 'Transit|Airports'] hi world"
     # list_response_string = re.search(r"\[.*?\]",s)
     # print(list_response_string.group())
-
-
-
-"""
-DOOH Targeting that an advertiser can use
-
-- Audience Targeting
-    - 1st Party Data
-    - 3rd Party Data
-        - Demographics
-        - Household 
-        - Behaviors
-        - Interests
-        - Life Events
-        - etc   
-- Geo Targeting
-    - Administrative boundaries - DMA, City, Zip, Address,
-    - Radius around a point Radius, Lat/Long
-    - Custom Geofences - Along highways, neighborhoods, etc
-    - Spacial indexing - Find screens in-between two points with a certain overlaps
-- Venue Type Targeting
-    - Day/Week Parting to reach certian audinces on the venue types       
-- Event Targeting
-- Picking specific locations in retail
-
-
-Strategy:
-
-
-
-
-setup : You are a helpful Digital out of home  (DOOH)planning expert 
-
-
-Here are the possible DOOH targeting tactics. Based on the below tactics recommend a list of relevant strategies for a given advertiser and goal that can use these tactics. 
-
-DOOH Targeting tactics: 
-- Audience Targeting
-    - 1st Party Data
-    - 3rd Party Data
-        - Demographics
-        - Household 
-        - Behaviors
-        - Interests
-        - Life Events
-        - etc   
-- Geo Targeting
-    - Administrative boundaries - DMA, City, Zip, Address,
-    - Radius around a point Radius, Lat/Long
-    - Custom Geofences - Along highways, neighborhoods, etc
-    - Spacial indexing - Find screens in-between two points with a certain overlaps
-- Venue Type Targeting
-    - Day/Week Parting to reach certian audinces on the venue types       
-- Event Targeting
-- Picking specific locations in retail
-
-
-assiant: Ok, I will use those tactics and recommend creative dooh strategies
-"""
