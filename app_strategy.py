@@ -3,6 +3,12 @@ import strategy_openAI as strategy_openAI
 import pandas as pd
 import random
 
+st.set_page_config(
+        page_title="AI DOOH Media Planner",
+        page_icon="https://images.squarespace-cdn.com/content/v1/5be473c589c172207271f9f2/1541790422617-C6FY044X2W3GKRDG3SDZ/favicon.ico?format=100w",
+
+)
+
 stateless_table = strategy_openAI.OPEN_AI_STATELESS()
 
 st.title("AI DOOH Media Planner")
